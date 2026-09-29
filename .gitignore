@@ -1,0 +1,14 @@
+/build/
+build-*/
+/.cache/
+/.vs/
+/out/
+/dist/
+/tools/steinberg-validator-build/
+/tools/steinberg-vst3sdk/
+/tools/validator-results/
+__pycache__/
+*.py[cod]
+*.user
+*.suo
+.DS_Store

@@ -1,0 +1,5 @@
+#include "material/dsp/ModalBank.h"
+#include <cmath>
+#include <iostream>
+#include <stdexcept>
+int main() { try { lsse::material::ModalBank e; e.prepare (48000); double early=0, late=0; for(int i=0;i<96000;++i){const auto y=e.process(i==0?1.0f:0.0f,0.5f,0.45f,0.8f); if(!std::isfinite(y)||std::abs(y)>1.001f)throw std::runtime_error("unstable modal output"); if(i<12000)early+=y*y; if(i>=84000)late+=y*y;} if(!(early>0&&late<early))throw std::runtime_error("impulse did not decay"); e.reset(); if(e.process(0,0.5f,0.5f,0.5f)!=0)throw std::runtime_error("reset silence failed");lsse::material::ModalBank a,b;a.prepare(48000);b.prepare(48000);double difference=0;for(int i=0;i<4096;++i){const auto in=i==0?1.0f:0.0f;difference+=std::abs(a.process(in,.5f,.4f,.8f,0,0,.4f,.2f,0)-b.process(in,.5f,.4f,.8f,1,1,.8f,.9f,1));}if(difference<0.01)throw std::runtime_error("material profiles did not diverge");std::cout<<"MATERIAL modal bank tests passed\n"; return 0;}catch(const std::exception&x){std::cerr<<x.what()<<'\n';return 1;} }
