@@ -2,19 +2,19 @@
 
 ## SOUND DESIGN EFFECTS FOR FL STUDIO
 
-a VST3 sound-design plugin suite for FL Studio focused on synthetic, procedural, and evolving sound
+a VST3 sound-design plugin suite for FL Studio focused on synthetic, procedural, and evolving sound.
 
-current version: 110
+current version: 1.1.0.
 
 ---
 
 ## THE IDEA
 
-LSSE is not one giant effect
+LSSE is not one giant effect.
 
-it is a family of nine separate sound-design plugins each plugin has its own character, parameters, state and DSP, but they share one visual language and one build system
+it is a family of nine separate sound-design plugins; each plugin has its own character, parameters, state and DSP, but they share one visual language and one build system.
 
-the suite is independent it does not connect to Sound Storyboard and it does not require another LSSE application to run
+the suite is independent; it does not connect to Sound Storyboard and it does not require another LSSE application to run.
 
 ---
 
@@ -22,39 +22,39 @@ the suite is independent it does not connect to Sound Storyboard and it does not
 
 ### MEMORY
 
-captures recent audio and recalls fragments of it as an unstable memory layer
+captures recent audio and recalls fragments of it as an unstable memory layer.
 
 ### TEXTURE
 
-reshapes surface detail with capture, grains, spectral wear, and deterministic movement
+reshapes surface detail with capture, grains, spectral wear, and deterministic movement.
 
 ### MACHINE
 
-turns audio into rhythmic mechanisms, pulses, and controlled mechanical repetition
+turns audio into rhythmic mechanisms, pulses, and controlled mechanical repetition.
 
 ### MATERIAL
 
-models resonant physical qualities such as hardness, size, damping, and inharmonicity
+models resonant physical qualities such as hardness, size, damping, and inharmonicity.
 
 ### IMPACT
 
-builds transient, body, and tail behaviour around incoming attacks
+builds transient, body, and tail behaviour around incoming attacks.
 
 ### CREATURE
 
-adds gesture, motion, and organic reactions that feel less static than a conventional effect
+adds gesture, motion, and organic reactions that feel less static than a conventional effect.
 
 ### MOTION
 
-moves sound through repeatable paths, space, and modulation
+moves sound through repeatable paths, space, and modulation.
 
 ### ENVIRONMENT
 
-creates evolving beds and environmental layers around the source
+creates evolving beds and environmental layers around the source.
 
 ### CONVOLUTION
 
-uses two impulse references, editing, and morphing to create spaces that can change over time
+uses two impulse references, editing, and morphing to create spaces that can change over time.
 
 ---
 
@@ -62,17 +62,17 @@ uses two impulse references, editing, and morphing to create spaces that can cha
 
 - Windows 10/11 — x64 VST3 for FL Studio;
 - macOS 11 or newer — universal VST3 for Apple Silicon and Intel, intended for FL Studio;
-- Linux — native x86_64 VST3 for compatible Linux hosts
+- Linux — native x86_64 VST3 for compatible Linux hosts.
 
-FL Studio itself is officially available for Windows and macOS the Linux build is a native VST3 build for Linux hosts; an FL Studio + Wine workflow is not a supported or tested target here
+FL Studio itself is officially available for Windows and macOS; the Linux build is a native VST3 build for Linux hosts. an FL Studio + Wine workflow is not a supported or tested target here.
 
 ---
 
 ## INSTALL
 
-prebuilt packages will be added after the release wording and binaries are checked
+release packages are not published yet; build them from source using the instructions below.
 
-copy every `vst3` bundle you want to use into the VST3 folder for your system:
+copy every `.vst3` bundle you want to use into the VST3 folder for your system:
 
 ### Windows
 
@@ -95,10 +95,10 @@ or for every user:
 ### Linux
 
 ```text
-~/vst3/
+~/.vst3/
 ```
 
-then open the plugin manager in the host and rescan installed plugins
+then open the plugin manager in the host and rescan installed plugins.
 
 ---
 
@@ -106,14 +106,14 @@ then open the plugin manager in the host and rescan installed plugins
 
 requirements:
 
-- CMake 322 or newer;
+- CMake 3.22 or newer;
 - Git;
 - a C++20 compiler;
 - Ninja on Linux;
 - Xcode on macOS;
-- Visual Studio 2022 on Windows
+- Visual Studio 2022 on Windows.
 
-JUCE 8015 is downloaded by CMake during configuration
+JUCE 8.0.15 is downloaded by CMake during configuration.
 
 ### Windows
 
@@ -133,7 +133,7 @@ ctest --preset macos-universal
 
 ### Linux
 
-install the JUCE development dependencies listed in `github/workflows/buildyml`, then run:
+install the JUCE development dependencies listed in `.github/workflows/build.yml`, then run:
 
 ```bash
 cmake --preset linux-release
@@ -148,10 +148,10 @@ ctest --preset linux-release
 after a successful build:
 
 ```bash
-python tools/package_releasepy --build-dir build/windows --platform windows-x64 --configuration Release
+python tools/package_release.py --build-dir build/windows --platform windows-x64 --configuration Release
 ```
 
-the script finds all nine VST3 bundles, creates one platform package and writes SHA-256 checksums use `macos-universal` or `linux-x64` as the platform name for those builds
+the script finds all nine VST3 bundles, creates one platform package and writes SHA-256 checksums; use `macos-universal` or `linux-x64` as the platform name for those builds.
 
 ---
 
@@ -166,9 +166,9 @@ the test suite checks:
 - editor construction;
 - multiple plugin instances;
 - changing sample rates and block sizes;
-- NaN, infinity, and output ceiling failures
+- NaN, infinity, and output ceiling failures.
 
-GitHub Actions is prepared to build and test Windows, macOS and Linux separately it does not publish releases
+GitHub Actions builds and tests Windows, macOS and Linux separately; it does not publish releases.
 
 ---
 
@@ -189,27 +189,28 @@ horizontal_tests/    full-suite host and stress tests
 tools/               release packaging helper
 ```
 
-the internal `convolution_lab` directory and `ConvolutionLab` C++ target are intentionally unchanged the user-facing plugin name is `CONVOLUTION`
+the internal `convolution_lab` directory and `ConvolutionLab` C++ target are intentionally unchanged; the user-facing plugin name is `CONVOLUTION`.
 
 ---
 
 ## IMPORTANT LIMITATIONS
 
-- macOS and Linux binaries still need their first real build on those operating systems;
+- Linux binaries build successfully on Ubuntu 24.04 and all 21 automated tests pass;
+- Linux host compatibility outside the automated JUCE host tests still needs broader testing;
 - macOS binaries are not signed or notarized yet;
-- Linux host compatibility has not been tested yet;
-- VST3 identifiers are kept stable so existing FL Studio projects can continue to restore the plugins
+- the macOS build still needs final validation in FL Studio;
+- VST3 identifiers are kept stable so existing FL Studio projects can continue to restore the plugins.
 
 ---
 
 ## LICENSE
 
-LSSE is free and open-source software licensed under the GNU Affero General Public License v30 (`AGPL-30-only`)
+LSSE is free and open-source software licensed under the GNU Affero General Public License v3.0 (`AGPL-3.0-only`).
 
-JUCE 8015 is used under its AGPLv3 option the VST3 SDK components used by JUCE are licensed separately under the MIT licence see `LICENSE` and `THIRD_PARTY_NOTICESmd` for details
+JUCE 8.0.15 is used under its AGPLv3 option; the VST3 SDK components used by JUCE are licensed separately under the MIT licence. see `LICENSE` and `THIRD_PARTY_NOTICES.md` for details.
 
 ---
 
 ## REPOSITORY
 
-planned repository name: `living-synthetic-sound-ecology`
+[living-synthetic-sound-ecology](https://github.com/techghoust/living-synthetic-sound-ecology)
